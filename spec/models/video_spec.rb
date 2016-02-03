@@ -1,9 +1,18 @@
 require 'spec_helper'
 
 describe Video do 
-  it "saves itself" do
-    video = Video.new(title: "Young Ones", description: "Classic old Brit comedy")
-    video.save
-    Video.first.title.should == "Young Ones"
+  it { belong_to (:category)}
+    
+
+  it "does not save a video without a title" do
+    video = Video.create(description: "A great video")
+    expect(Video.count).to eq(0)
   end
+
+  it "does not save a video without a description" do
+    video = Video.create(title: "Southpark")
+    expect(Video.count).to eq(0)
+  end
+
+  
 end
