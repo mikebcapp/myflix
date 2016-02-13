@@ -6,4 +6,9 @@ class Video < ActiveRecord::Base
     return [] if search_term.blank?
     where("title LIKE ?", "%#{search_term}%").order("created_at DESC")
   end
+
+  def self.recent_videos
+    @recent = Video.take(6)
+    @recent.sort_by{ |a| a.created_at }.reverse 
+  end
 end

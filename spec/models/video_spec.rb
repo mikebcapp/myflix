@@ -32,5 +32,30 @@ describe "search_by_title" do
     back_to_future = Video.create(title: "Back to Future", description: "Time Travel")
     expect(Video.search_by_title("")).to eq([])
   end     
+end
+
+describe "Most recent 6 videos" do
+  it "returns 6 videos when there are more than 6 videos in total" do
+    futurama=Video.create(title: "Futurama", description: "Space Travel")
+    southpark=Video.create(title: "SouthPark", description: "Crazy animated show")
+    back_to_future = Video.create(title: "Back to Future", description: "Time Travel")
+    futurama=Video.create(title: "Futurama", description: "Space Travel")
+    southpark=Video.create(title: "SouthPark", description: "Crazy animated show")
+    back_to_future = Video.create(title: "Back to Future", description: "Time Travel")
+    futurama=Video.create(title: "Futurama", description: "Space Travel")
+    expect(Video.recent_videos.count).to eq(6)
+  end
+  it "returns the total number of videos  when there are less than 6 total videos" do 
+    futurama=Video.create(title: "Futurama", description: "Space Travel")
+    southpark=Video.create(title: "SouthPark", description: "Crazy animated show")
+    back_to_future = Video.create(title: "Back to Future", description: "Time Travel")
+    expect(Video.recent_videos.count).to eq(3)
+  end
+  it "returns the videos in reverse chronological order ie, the most recent first" do
+    futurama = Video.create(title: "Futurama", description: "Space Travel", created_at: 1.day.ago)
+    southpark = Video.create(title: "SouthPark", description: "Crazy animated show", created_at: 5.day.ago)
+    back_to_future = Video.create(title: "Back to Future", description: "Time Travel", created_at: 4.day.ago)
+    expect(Video.recent_videos).to eq([futurama,back_to_future, southpark])
+  end
 
 end

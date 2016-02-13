@@ -12,4 +12,8 @@ class VideosController < ApplicationController
     @results = Video.search_by_title(params[:search_term])
   end
 
+  def recent
+    @recent = Video.recent_videos
+  end
+
 end
