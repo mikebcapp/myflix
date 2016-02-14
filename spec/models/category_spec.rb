@@ -14,20 +14,20 @@ describe "#recent_videos" do
     southpark = Video.create(title: "SouthPark", description: "Crazy animated show", category: comedies)
     back_to_future = Video.create(title: "Back to Future", description: "Time Travel", category: comedies)
     futurama = Video.create(title: "Futurama", description: "Space Travel", category: comedies)
-    expect(Video.recent_videos.count).to eq(6)
+    expect(comedies.recent_videos.count).to eq(6)
   end
   it "returns the total number of videos  when there are less than 6 total videos" do
     comedies = Category.create(name: "comedies") 
     futurama = Video.create(title: "Futurama", description: "Space Travel", category: comedies)
     southpark = Video.create(title: "SouthPark", description: "Crazy animated show", category: comedies)
     back_to_future = Video.create(title: "Back to Future", description: "Time Travel", category: comedies)
-    expect(Video.recent_videos.count).to eq(3)
+    expect(comedies.recent_videos.count).to eq(3)
   end
   it "returns the videos in reverse chronological order ie, the most recent first" do
     comedies = Category.create(name: "comedies")
     futurama = Video.create(title: "Futurama", description: "Space Travel", category: comedies, created_at: 1.day.ago)
     southpark = Video.create(title: "SouthPark", description: "Crazy animated show", category: comedies, created_at: 5.day.ago)
     back_to_future = Video.create(title: "Back to Future", description: "Time Travel", category: comedies, created_at: 4.day.ago)
-    expect(Video.recent_videos).to eq([futurama, back_to_future, southpark])
+    expect(comedies.recent_videos).to eq([futurama, back_to_future, southpark])
   end
 end
