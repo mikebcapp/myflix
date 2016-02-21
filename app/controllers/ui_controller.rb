@@ -9,3 +9,4 @@ class UiController < ApplicationController
     @videos = Video.all
   end
 end
+
