@@ -1,5 +1,5 @@
 class UiController < ApplicationController
-  before_filter do
+  before_action do
     redirect_to :root if Rails.env.production?
   end
 
@@ -9,4 +9,3 @@ class UiController < ApplicationController
     @videos = Video.all
   end
 end
-
