@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Video do 
   it { should belong_to (:category) }
   it { should validate_presence_of (:title) }
-  it { should validate_presence_of (:description) }
+  it { should validate_presence_of (:description) } 
+  it { should have_many(:reviews).order("created_at DESC") }
 end
 
 describe ".search_by_title" do
@@ -31,5 +32,5 @@ describe ".search_by_title" do
     futurama = Video.create(title: "Futurama", description: "Space Travel", created_at: 1.day.ago)
     back_to_future = Video.create(title: "Back to Future", description: "Time Travel")
     expect(Video.search_by_title("")).to eq([])
-  end     
+  end 
 end
