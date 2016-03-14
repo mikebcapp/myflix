@@ -69,10 +69,10 @@ describe SessionsController do
       expect(response).to redirect_to root_path
     end
 
-    it "sets the info notice advising logged out" do
+    it "sets the info notice" do
       session[:user_id] = Fabricate(:user).id
       get :destroy
-      expect(flash[:info]).not_to be_blank
+      expect(flash[:info]).to be_present
     end
   end  
 end
